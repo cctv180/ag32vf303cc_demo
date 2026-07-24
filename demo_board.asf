@@ -1,0 +1,6 @@
+puts "************ DESIGN ASF ************"
+
+# Enable PIN_23 (WKUP pin) to wake up device from standby. Not available on other pins.
+#set_config -pin PIN_23 CFG_WKUP_EN 1'b1
+# Use falling edge of the WKUP pin. Default is rising edge.
+#set_config -pin PIN_23 CFG_WKUP_INV 1'b1

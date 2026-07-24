@@ -1,0 +1,21 @@
+# AG32 DEMO board pin map (AGRV2KL48 / AG32VF303CCT6 class)
+# Adjust PIN numbers to match your schematic.
+
+SYSCLK 200
+BUSCLK 100
+
+HSECLK 8
+
+
+# UART0 — printf / PlatformIO Serial Monitor
+UART0_UARTTXD PIN_30
+UART0_UARTRXD PIN_31
+
+
+# User button
+GPIO6_2 PIN_35 # IO_Button1
+
+
+# On-board LEDs
+GPIO4_1 PIN_28 # LED1
+GPIO4_2 PIN_29 # LED2
