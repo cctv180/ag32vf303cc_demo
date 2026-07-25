@@ -5,5 +5,6 @@
 .vscode/launch.json
 .vscode/ipch
 .cache
+.clangd
 compile_commands.json
 *_batch.bin
