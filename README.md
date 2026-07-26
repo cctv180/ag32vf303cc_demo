@@ -1,6 +1,6 @@
 # ag32vf303_demo
 
-AG32（AgRV2K / `agrv2k_303`）示例工程：LED 闪烁 + UART `printf`。
+AG32（AgRV2K / `agrv2k_303`）示例工程：FreeRTOS 任务驱动 LED 闪烁 + UART `printf`。
 
 基于 AGM PlatformIO 开发环境（`platform = AgRV`），应用源码在 `src/`，逻辑与管脚配置见 `demo_board.ve` / `demo_board.asf`。
 
@@ -28,24 +28,26 @@ AG32（AgRV2K / `agrv2k_303`）示例工程：LED 闪烁 + UART `printf`。
 
 ## 本工程内嵌 SDK
 
-为方便查看驱动源码与随工程版本管理，已将基础 SDK 拷入工程：
+为方便查看驱动源码与随工程版本管理，已将基础 SDK 与 FreeRTOS 拷入工程：
 
 ```text
 frameworks/
-└─ framework-agrv_sdk/    # 目录名不可更改
+├─ framework-agrv_sdk/       # 目录名不可更改
+└─ framework-agrv_freertos/  # FreeRTOS 内核（目录名不可更改）
 ```
 
 `platformio.ini` 中通过下列选项优先使用工程内 SDK：
 
 ```ini
-framework = agrv_sdk
+framework = agrv_sdk, agrv_freertos
 inline_framework_dir = ./frameworks
 ```
 
 说明：
 
-- 外层目录名可自定义（本工程用 `frameworks`），子目录必须叫 `framework-agrv_sdk`。
-- 若后续启用 `agrv_freertos`、`agrv_lwip` 等，可将对应 `framework-agrv_*` 同样放入 `frameworks/`。
+- 外层目录名可自定义（本工程用 `frameworks`），子目录必须叫 `framework-agrv_*`。
+- 应用侧需提供 `src/FreeRTOSConfig.h`（本工程已含，可按需改堆大小、tick 等）。
+- 若后续启用 `agrv_lwip`、`agrv_tinyusb` 等，可将对应 `framework-agrv_*` 同样放入 `frameworks/`。
 - 未放入工程的 framework 仍从本机 `packages` 安装目录加载。
 - 合并方式参见：[将 SDK 合并到工程的办法](https://www.agmcn.com/doc/5768.html)。
 
@@ -108,7 +110,7 @@ PlatformIO 侧栏 其它 Custom 任务：**Unlock Flash** / **Wipe Flash**（慎
 | 项 | 当前 | 含义 |
 |---|---|---|
 | `board` | `agrv2k_303` | 板型/Flash：256K 用 103/303，1M 用 407（与脚数无关） |
-| `framework` | `agrv_sdk` | 使用的库；可逗号多选，如再加 `agrv_freertos` |
+| `framework` | `agrv_sdk, agrv_freertos` | 基础 SDK + FreeRTOS；可再加 `agrv_lwip` 等 |
 | `inline_framework_dir` | `./frameworks` | 优先用工程内 `framework-agrv_*` |
 | `program` | `agrv_demo` | 产物名：`agrv_demo.elf` / `.bin` / `*_batch.bin` |
 | `; toolchain` | 注释 | `gnu`（默认）或 `clang` |
@@ -212,10 +214,13 @@ AG32 的 **信号线**（如 `UART0_UARTTXD`、`GPIO4_1`）与芯片 **物理管
 
 ```text
 .
-├─ src/main.c                 # 应用
+├─ src/main.c                 # 应用（FreeRTOS blink 任务）
+├─ src/FreeRTOSConfig.h       # FreeRTOS 配置
 ├─ demo_board.ve              # 时钟 + 信号线↔管脚
 ├─ demo_board.asf             # CPLD：上拉/下拉、驱动能力等
-├─ frameworks/framework-agrv_sdk/
+├─ frameworks/
+│  ├─ framework-agrv_sdk/
+│  └─ framework-agrv_freertos/
 ├─ platformio.ini
 └─ README.md
 ```

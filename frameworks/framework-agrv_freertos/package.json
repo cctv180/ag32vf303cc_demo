@@ -1,0 +1,15 @@
+{
+  "name": "framework-agrv_freertos",
+  "version": "1.0.0",
+  "description": "A free realtime OS suite, customized for AgRV devices",
+  "keywords": [
+    "framework",
+    "realtime",
+    "os",
+    "rtos",
+    "freertos",
+    "risc-v",
+    "agrv",
+    "agm"
+  ]
+}
