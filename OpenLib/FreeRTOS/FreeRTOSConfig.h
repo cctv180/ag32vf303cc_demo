@@ -6,7 +6,7 @@
 #define configMTIME_BASE_ADDRESS    (CLINT_BASE + 0xBFF8U)
 #define configMTIMECMP_BASE_ADDRESS (CLINT_BASE + 0x4000U)
 
-#define configISR_STACK_SIZE_WORDS 512
+#define configISR_STACK_SIZE_WORDS              512
 
 #define configUSE_PREEMPTION                    1
 #define configUSE_PORT_OPTIMISED_TASK_SELECTION 1
@@ -20,9 +20,9 @@
 #define configUSE_TIME_SLICING                  1
 
 /* Memory allocation related definitions. */
-#define configSUPPORT_STATIC_ALLOCATION             1
-#define configSUPPORT_DYNAMIC_ALLOCATION            1
-#define configTOTAL_HEAP_SIZE                       32768
+#define configSUPPORT_STATIC_ALLOCATION         1
+#define configSUPPORT_DYNAMIC_ALLOCATION        1
+#define configTOTAL_HEAP_SIZE                   32768
 
 /* Hook function related definitions. */
 #define configUSE_IDLE_HOOK                     0

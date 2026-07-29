@@ -46,7 +46,7 @@ inline_framework_dir = ./frameworks
 说明：
 
 - 外层目录名可自定义（本工程用 `frameworks`），子目录必须叫 `framework-agrv_*`。
-- 应用侧需提供 `src/FreeRTOSConfig.h`（本工程已含，可按需改堆大小、tick 等）。
+- 应用侧需提供 `OpenLib/FreeRTOS/FreeRTOSConfig.h`（本工程已含，可按需改堆大小、tick 等）。
 - 若后续启用 `agrv_lwip`、`agrv_tinyusb` 等，可将对应 `framework-agrv_*` 同样放入 `frameworks/`。
 - 未放入工程的 framework 仍从本机 `packages` 安装目录加载。
 - 合并方式参见：[将 SDK 合并到工程的办法](https://www.agmcn.com/doc/5768.html)。
@@ -215,7 +215,7 @@ AG32 的 **信号线**（如 `UART0_UARTTXD`、`GPIO4_1`）与芯片 **物理管
 ```text
 .
 ├─ src/main.c                 # 应用（FreeRTOS blink 任务）
-├─ src/FreeRTOSConfig.h       # FreeRTOS 配置
+├─ OpenLib/FreeRTOS/FreeRTOSConfig.h  # FreeRTOS 配置
 ├─ demo_board.ve              # 时钟 + 信号线↔管脚
 ├─ demo_board.asf             # CPLD：上拉/下拉、驱动能力等
 ├─ frameworks/
